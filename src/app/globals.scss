@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #FFFFFF;
+}
+
+a {
+  text-decoration: underline;
+}
+
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+button {
+  padding: 14px 20px;
+  background-color: #3B75A2;
+  border-radius: 8px;
+  color: #F5F5F5;
+  font-weight: 500;
+  font-size: 14px;
+  border: none;
+
+  cursor: pointer;
+}
