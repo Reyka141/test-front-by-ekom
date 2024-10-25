@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Roboto } from "next/font/google";
+import { Inter, Roboto, Work_Sans } from "next/font/google";
 import "./globals.scss";
 import ClientSideToastContainer from "@/components/toastContainer";
 
@@ -8,6 +8,12 @@ const roboto = Roboto({
   weight: ["500"],
   subsets: ["latin"],
   variable: "--font-roboto",
+});
+
+const sans = Work_Sans({
+  weight: ["300", "400"],
+  subsets: ["latin"],
+  variable: "--font-sans",
 });
 
 export const metadata: Metadata = {
@@ -22,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${roboto.variable}`}>
+      <body className={`${inter.className} ${roboto.variable} ${sans.variable}`}>
         <div className="container">
           <ClientSideToastContainer />
           {children}
