@@ -21,6 +21,7 @@ export default function Authorization() {
       username: name,
     });
     localStorage.setItem('username', name);
+    route.push(`/${e.target.id}`);
   };
   return (
     <main className={style.main}>
@@ -46,7 +47,7 @@ export default function Authorization() {
             <button type="submit" id="calculator" onClick={handleClick}>
               Открыть калькулятор
             </button>
-            <button type="submit" id="generator" onClick={handleClick}>
+            <button type="submit" id="password-generator" onClick={handleClick}>
               Открыть генератор
             </button>
           </div>
