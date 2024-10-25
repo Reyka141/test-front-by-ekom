@@ -1,0 +1,19 @@
+.screen {
+  text-align: end;
+  font-weight: 300;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.topSide {
+  font-size: 40px;
+  line-height: 47px;
+  opacity: 40%;
+
+  margin-bottom: 16px;
+}
+
+.bottomSide {
+  font-size: 96px;
+  line-height: 96px;
+}
