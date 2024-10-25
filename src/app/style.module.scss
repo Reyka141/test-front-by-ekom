@@ -50,6 +50,7 @@
   height: 24px;
   border-radius: 29px;
   background-color: #E5E5E5;
+  border: none;
 
   display: flex;
   align-items: center;
@@ -60,6 +61,11 @@
   right: 10px;
 
   cursor: pointer;
+
+
+  &:hover {
+    background-color: #b64d4d
+  }
 }
 
 
