@@ -5,9 +5,10 @@ import Header from "@/components/header";
 import { useFormik } from "formik";
 import { generateMultiple, GenerateOptions } from "generate-password";
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClone } from "@fortawesome/free-solid-svg-icons/faClone";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
+import { uniq } from "lodash";
 
 type FormValues = {
   length: string;
@@ -43,13 +44,26 @@ export default function PasswordGenerator() {
 
   const generatePassword = (option: GenerateOptions | undefined) => {
     const passwords = generateMultiple(5, option);
+    if (option?.excludeSimilarCharacters) {
+      let count = 0;
+      let isUniq = false;
+      while(!isUniq) {
+        const items = generateMultiple(5, option);
+        isUniq = items.every((pas) => uniq(pas.split('')).length === pas.length);
+        count += 1;
+        console.log(isUniq)
+        if (isUniq || count > 200) {
+          return items;
+        }
+      };
+    }
     return passwords;
   };
 
-  const copyTextToClipboard = async (text:string) => {
+  const copyTextToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      toast.success('Текст успешно скопирован в буфер обмена!');
+      toast.success("Текст успешно скопирован в буфер обмена!");
     } catch (err) {
       toast.error(`Ошибка: ${err}`);
     }
@@ -61,7 +75,10 @@ export default function PasswordGenerator() {
         {items.map((item) => (
           <li key={item}>
             {item}
-            <FontAwesomeIcon icon={faClone} onClick={() => copyTextToClipboard(item)} />
+            <FontAwesomeIcon
+              icon={faClone}
+              onClick={() => copyTextToClipboard(item)}
+            />
           </li>
         ))}
       </ul>
