@@ -2,7 +2,7 @@
 
 import Header from "@/components/header";
 import calculate from "./calculate.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Wrapper from "../../components/Wrapper";
 import Screen from "../../components/Screen";
@@ -18,7 +18,6 @@ const btnValues = [
 ];
 
 const tools = ["C", "+-", "%"];
-
 const symbols = ["/", "X", "-", "+", "="];
 
 const toLocaleString = (num: number) =>
@@ -33,6 +32,32 @@ export default function Calculator() {
 
   const [mathExpression, setMathExpression] = useState("");
 
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      const key = e.key;
+
+      if (!isNaN(Number(key))) {
+        numClickHandler(Number(key));
+      } else if (key === ".") {
+        commaClickHandler();
+      } else if (key === "+" || key === "-" || key === "*" || key === "/") {
+        signClickHandler(key === "*" ? "X" : key);
+      } else if (key === "=" || key === "Enter") {
+        e.preventDefault();
+        equalsClickHandler();
+      } else if (key === "Backspace") {
+        deleteLastNum();
+      } else if (key === "Escape") {
+        resetClickHandler();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [calc]);
+
   const numClickHandler = (value: string | number) => {
     if (calc.num.toString().length < 4) {
       setCalc({
@@ -46,16 +71,10 @@ export default function Calculator() {
     }
   };
 
-  const commaClickHandler = (e: {
-    preventDefault: () => void;
-    target: { textContent: string };
-  }) => {
-    e.preventDefault();
-    const value = e.target.textContent;
-
+  const commaClickHandler = () => {
     setCalc({
       ...calc,
-      num: !calc.num.toString().includes(".") ? calc.num + value : calc.num,
+      num: !calc.num.toString().includes(".") ? calc.num + "." : calc.num,
     });
   };
 
@@ -86,7 +105,7 @@ export default function Calculator() {
         ...calc,
         res:
           calc.num === 0 && calc.sign === "/"
-            ? "Can't divide with 0"
+            ? "Can't divide by 0"
             : math(Number(calc.res), Number(calc.num), calc.sign),
         sign: "",
         num: 0,
@@ -109,15 +128,14 @@ export default function Calculator() {
 
     setCalc({
       ...calc,
-      num: (num /= Math.pow(100, 1)),
-      res: (res /= Math.pow(100, 1)),
+      num: num / 100,
+      res: res / 100,
       sign: "",
     });
   };
 
   const resetClickHandler = () => {
     setCalc({
-      ...calc,
       sign: "",
       num: 0,
       res: 0,
@@ -132,49 +150,46 @@ export default function Calculator() {
     });
   };
 
-
   return (
     <>
       <Header />
       <main className={calculate.main}>
         <Wrapper>
           <Screen
-            value={calc.num ? calc.num : calc.res}
+            value={calc.num || calc.res}
             expression={mathExpression}
           />
           <ButtonBox>
-            {btnValues.flat().map((btn, i) => {
-              return (
-                <Button
-                  key={i}
-                  className={
-                    tools.includes(btn)
-                      ? "tools"
-                      : symbols.includes(btn)
-                      ? "symbols"
-                      : "simple"
-                  }
-                  value={btn}
-                  onClick={
-                    btn === "C"
-                      ? resetClickHandler
-                      : btn === "+-"
-                      ? invertClickHandler
-                      : btn === "%"
-                      ? percentClickHandler
-                      : btn === "="
-                      ? equalsClickHandler
-                      : btn === "/" || btn === "X" || btn === "-" || btn === "+"
-                      ? signClickHandler
-                      : btn === "."
-                      ? commaClickHandler
-                      : btn === "<"
-                      ? deleteLastNum
-                      : numClickHandler
-                  }
-                />
-              );
-            })}
+            {btnValues.flat().map((btn, i) => (
+              <Button
+                key={i}
+                className={
+                  tools.includes(btn)
+                    ? "tools"
+                    : symbols.includes(btn)
+                    ? "symbols"
+                    : "simple"
+                }
+                value={btn}
+                onClick={
+                  btn === "C"
+                    ? resetClickHandler
+                    : btn === "+-"
+                    ? invertClickHandler
+                    : btn === "%"
+                    ? percentClickHandler
+                    : btn === "="
+                    ? equalsClickHandler
+                    : btn === "/" || btn === "X" || btn === "-" || btn === "+"
+                    ? signClickHandler
+                    : btn === "."
+                    ? commaClickHandler
+                    : btn === "<"
+                    ? deleteLastNum
+                    : numClickHandler
+                }
+              />
+            ))}
           </ButtonBox>
         </Wrapper>
       </main>
