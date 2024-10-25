@@ -44,10 +44,10 @@ export default function Authorization() {
             </div>
           </div>
           <div className={style.contentBottom}>
-            <button type="submit" id="calculator" onClick={handleClick}>
+            <button type="submit" id="calculator" className="btn" onClick={handleClick}>
               Открыть калькулятор
             </button>
-            <button type="submit" id="password-generator" onClick={handleClick}>
+            <button type="submit" id="password-generator" className="btn" onClick={handleClick}>
               Открыть генератор
             </button>
           </div>
