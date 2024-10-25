@@ -15,7 +15,8 @@ body {
 }
 
 a {
-  text-decoration: underline;
+  text-decoration: none;
+  color: inherit;
 }
 
 
@@ -35,4 +36,21 @@ button {
   border: none;
 
   cursor: pointer;
+}
+
+input {
+  border: solid 1px #D1D1D1;
+  border-radius: 8px;
+
+  padding: 14px 16px;
+
+  font-weight: 500;
+  font-size: 14px;
+  &:focus {
+    outline: solid 1px #7e7e7e;
+  }
+}
+
+input[type='checkbox'] {
+  accent-color: #3B75A2; 
 }
