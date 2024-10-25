@@ -1,0 +1,36 @@
+.button {
+  height: 72px; 
+  width: 87.5px;
+  border-radius: 24px;
+  font-size: 32px;
+  font-weight: 400;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+.simple {
+  color: #000000;
+  background: #FFFFFF;
+}
+
+.simple:hover {
+  background-color: #d2d3da85;
+}
+
+.tools {
+  background: #D2D3DA;
+}
+
+.tools:hover {
+  background: #0606088e;
+}
+
+.symbols {
+  color: #FFFFFF;
+  background: #3B75A2;
+}
+
+.symbols:hover {
+  background: #274f6d;
+}
