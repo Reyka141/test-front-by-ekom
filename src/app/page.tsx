@@ -14,7 +14,8 @@ export default function Authorization() {
     e.preventDefault();
     if (!name) {
       localStorage.setItem('username', username);
-      route.push(`/${e.currentTarget.id}`);
+      console.log('id', e.currentTarget.name)
+      route.push(`/${e.currentTarget.name}`);
       return;
     }
     updateUser({
@@ -44,15 +45,15 @@ export default function Authorization() {
             </div>
           </div>
           <div className={style.contentBottom}>
-            <button type="submit" id="calculator" className="btn" onClick={handleClick}>
+            <button type="submit" name="calculator" className="btn" onClick={handleClick}>
               Открыть калькулятор
             </button>
-            <button type="submit" id="password-generator" className="btn" onClick={handleClick}>
+            <button type="submit" name="password-generator" className="btn" onClick={handleClick}>
               Открыть генератор
             </button>
           </div>
         </form>
-        <div className={style.closeButton}>
+        <button  className={style.closeButton} name="password-generator" onClick={handleClick}>
           <svg
             width="11"
             height="10"
@@ -65,7 +66,7 @@ export default function Authorization() {
               fill="#4F4F4F"
             />
           </svg>
-        </div>
+        </button>
       </div>
     </main>
   );
