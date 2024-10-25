@@ -28,7 +28,7 @@ a {
 
 .btn {
   padding: 14px 20px !important;
-  background-color: #3B75A2 !important;
+  background-color: #3B75A2 ;
   border-radius: 8px !important;
   color: #F5F5F5 !important;
   font-weight: 500 !important;
@@ -36,7 +36,14 @@ a {
   border: none !important;
 
   cursor: pointer;
+
+  &:hover {
+    background-color: #1b364b
+  }
+  
 }
+
+
 
 input {
   border: solid 1px #D1D1D1;
