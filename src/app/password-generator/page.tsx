@@ -9,6 +9,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClone } from "@fortawesome/free-solid-svg-icons/faClone";
 import { toast } from 'react-toastify';
 
+type FormValues = {
+  length: string;
+  uppercase: boolean;
+  lowercase: boolean;
+  numbers: boolean;
+  symbols: boolean;
+  excludeSimilarCharacters: boolean;
+};
+
 export default function PasswordGenerator() {
   const [passwordList, setPasswordList] = useState([""]);
   useEffect(() => {
@@ -23,7 +32,7 @@ export default function PasswordGenerator() {
       symbols: false,
       excludeSimilarCharacters: false,
     },
-    onSubmit: (values: any) => {
+    onSubmit: (values: FormValues) => {
       const result = {
         ...values,
         length: parseInt(values.length),

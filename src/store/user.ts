@@ -1,10 +1,18 @@
-import { create } from 'zustand'
+import { create } from 'zustand';
 
-export const userStore = create((set) => ({
+export type User = { username: string };
+
+export type UserState = {
+  user: User;
+  updateUser: (newUser: User) => void;
+};
+
+export const userStore = create<UserState>((set) => ({
   user: {
     username: 'Аноним'
   },
-  updateUser: (newUser: any) => set((state: any) => ({
-    user: { ...state.user, ...newUser }
-  }))
-}))
+  updateUser: (newUser) =>
+    set((state) => ({
+      user: { ...state.user, ...newUser }
+    }))
+}));

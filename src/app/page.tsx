@@ -1,27 +1,27 @@
 "use client";
 
-import { userStore } from "@/store/user";
+import { userStore, UserState } from "@/store/user";
 import style from "./style.module.scss";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Authorization() {
   const [name, setName] = useState("");
-  const username = userStore((state: any) => state.user.username);
-  const updateUser = userStore((state: any) => state.updateUser);
+  const username = userStore((state: UserState) => state.user.username);
+  const updateUser = userStore((state: UserState) => state.updateUser);
   const route = useRouter();
-  const handleClick = (e: any) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (!name) {
       localStorage.setItem('username', username);
-      route.push(`/${e.target.id}`);
+      route.push(`/${e.currentTarget.id}`);
       return;
     }
     updateUser({
       username: name,
     });
     localStorage.setItem('username', name);
-    route.push(`/${e.target.id}`);
+    route.push(`/${e.currentTarget.id}`);
   };
   return (
     <main className={style.main}>

@@ -48,7 +48,7 @@ export default function Calculator() {
 
   const commaClickHandler = (e: {
     preventDefault: () => void;
-    target: { textContent: any };
+    target: { textContent: string };
   }) => {
     e.preventDefault();
     const value = e.target.textContent;
