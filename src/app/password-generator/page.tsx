@@ -133,7 +133,7 @@ export default function PasswordGenerator() {
               </label>
             </div>
 
-            <button className={password.btn} type="submit">
+            <button className={`${password.btn} btn`} type="submit">
               Сгенерировать пароль
             </button>
           </form>
